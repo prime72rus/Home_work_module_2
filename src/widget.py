@@ -9,11 +9,14 @@ def mask_account_card(input_data: str) -> str:
     card_number_length = 16
     account_number_length = 20
 
-    number_after_split = input_data.split()[-1]
-    if len(number_after_split) == card_number_length and number_after_split.isdigit():
-        output_data = " ".join(input_data.split()[:-1]) + " " + get_mask_card_number(number_after_split)
-    elif len(number_after_split) == account_number_length and number_after_split.isdigit():
-        output_data = " ".join(input_data.split()[:-1]) + " " + get_mask_account(number_after_split)
+    parts = input_data.split()
+    number = parts.pop()
+    name = ' '.join(parts)
+
+    if len(number) == card_number_length and number.isdigit():
+        output_data = f"{name} {get_mask_card_number(number)}"
+    elif len(number) == account_number_length and number.isdigit():
+        output_data = f"{name} {get_mask_account(number)}"
     else:
         output_data = "Ошибка"
     return output_data
