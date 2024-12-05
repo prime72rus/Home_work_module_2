@@ -11,7 +11,7 @@ def mask_account_card(input_data: str) -> str:
 
     parts = input_data.split()
     number = parts.pop()
-    name = ' '.join(parts)
+    name = " ".join(parts)
 
     if len(number) == card_number_length and number.isdigit():
         output_data = f"{name} {get_mask_card_number(number)}"
