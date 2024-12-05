@@ -2,7 +2,7 @@ from typing import Dict, List
 
 
 def filter_by_state(
-    input_data_for_filter: List[Dict[str, str | int]], sorted_key: str = "EXECUTED"
+    input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
 ) -> List[Dict[str, str | int]]:
     """
     Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED').
@@ -10,9 +10,9 @@ def filter_by_state(
     у которых ключ state соответствует указанному значению.
     """
     output_data = []
-    for i in range(len(input_data_for_filter)):
-        if input_data_for_filter[i]["state"] == sorted_key:
-            output_data.append(input_data_for_filter[i])
+    for data_item in input_data_for_filter:
+        if data_item["state"] == target_state:
+            output_data.append(data_item)
     return output_data
 
 
