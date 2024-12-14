@@ -13,7 +13,9 @@ def mask_account_card(input_data: str) -> str:
     number = parts.pop()
     name = " ".join(parts)
 
-    if len(number) == card_number_length and number.isdigit():
+    if len(name) == 0:
+        output_data = "Ошибка"
+    elif len(number) == card_number_length and number.isdigit():
         output_data = f"{name} {get_mask_card_number(number)}"
     elif len(number) == account_number_length and number.isdigit():
         output_data = f"{name} {get_mask_account(number)}"
