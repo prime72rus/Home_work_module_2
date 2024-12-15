@@ -1,6 +1,6 @@
 import pytest
 
-from src.widget import get_date, mask_account_card
+from src.widget import format_date_is_correct, get_date, mask_account_card
 
 
 @pytest.mark.parametrize(
@@ -64,3 +64,9 @@ def test_get_date(date):
 def test_get_date_error(date_error):
     with pytest.raises(ValueError):
         get_date(date_error)
+
+
+def test_format_date_is_correct():
+    assert format_date_is_correct("2024-03-11T02:26:18.671407") is True
+    assert format_date_is_correct("2024-03-11") is False
+    assert format_date_is_correct("") is False
