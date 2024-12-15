@@ -4,7 +4,7 @@ from src.widget import format_date_is_correct
 
 
 def filter_by_state(
-    input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
+        input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
 ) -> List[Dict[str, str | int]] | None:
     """
     Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED').
@@ -21,18 +21,16 @@ def filter_by_state(
 
 
 def sort_by_date(
-    input_data_for_sorted: List[Dict[str, str | int]], sorted_param: bool = True
+        input_data_for_sorted: List[Dict[str, str | int]], sorted_param: bool = True
 ) -> List[Dict[str, str | int]] | None:
     """
     Функция принимает список словарей и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание).
     Функция должна возвращать новый список, отсортированный по дате (date).
     """
     for data_item in input_data_for_sorted:
-        if "date" in data_item.keys():
-            if format_date_is_correct(str(data_item["date"])):
-                return sorted(input_data_for_sorted, key=lambda x: x["date"], reverse=sorted_param)
-            else:
-                raise ValueError("Недопустимые данные в значении даты")
-        else:
+        if "date" not in data_item.keys():
             raise ValueError("Отсутствуют данные для ключа сортировки")
-    return None
+        else:
+            if not format_date_is_correct(str(data_item["date"])):
+                raise ValueError("Недопустимые данные в значении даты")
+    return sorted(input_data_for_sorted, key=lambda x: x["date"], reverse=sorted_param)
