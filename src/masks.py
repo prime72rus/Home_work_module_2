@@ -3,8 +3,9 @@ def get_mask_card_number(card_number: str) -> str:
     Функция принимает на вход номер карты в виде числа и возвращает маску номера по правилу
     XXXX XX** **** XXXX
     """
-    mask_card = card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[12:]
-    return mask_card
+    if len(card_number) != 16 or not card_number.isdigit():
+        raise ValueError
+    return card_number[:4] + " " + card_number[4:6] + "** **** " + card_number[12:]
 
 
 def get_mask_account(account_number: str) -> str:
@@ -12,5 +13,6 @@ def get_mask_account(account_number: str) -> str:
     Функция принимает на вход номер счета в виде числа и возвращает маску номера по правилу
     **XXXX
     """
-    mask_account = "**" + account_number[-4:]
-    return mask_account
+    if len(account_number) != 20 or not account_number.isdigit():
+        raise ValueError
+    return "**" + account_number[-4:]
