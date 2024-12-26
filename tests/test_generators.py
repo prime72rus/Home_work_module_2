@@ -1,6 +1,6 @@
 import pytest
 
-from src.generators import filter_by_currency, transaction_descriptions
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
 
 
 @pytest.fixture
@@ -104,6 +104,7 @@ def test_filter_by_currency_1(test_data):
     with pytest.raises(StopIteration):
         next(gen_filter_by_currency)
 
+
 def test_filter_by_currency_2():
     gen_filter_by_currency = filter_by_currency([], "RU")
     with pytest.raises(StopIteration):
@@ -133,3 +134,42 @@ def test_transaction_descriptions_2(test_data):
     gen_transaction_descriptions = transaction_descriptions([])
     with pytest.raises(StopIteration):
         next(gen_transaction_descriptions)
+
+
+def test_card_number_generator():
+    gen = card_number_generator(1, 3)
+    assert next(gen) == "0000 0000 0000 0001"
+    assert next(gen) == "0000 0000 0000 0002"
+    assert next(gen) == "0000 0000 0000 0003"
+    with pytest.raises(StopIteration):
+        next(gen)
+
+
+def test_card_number_generator_error_1():
+    gen = card_number_generator(-1, 3)
+    with pytest.raises(ValueError):
+        next(gen)
+
+
+def test_card_number_generator_error_2():
+    gen = card_number_generator(1, -3)
+    with pytest.raises(ValueError):
+        next(gen)
+
+
+def test_card_number_generator_error_3():
+    gen = card_number_generator(0, 3)
+    with pytest.raises(ValueError):
+        next(gen)
+
+
+def test_card_number_generator_error_4():
+    gen = card_number_generator(1, 10000000000000000)
+    with pytest.raises(ValueError):
+        next(gen)
+
+
+def test_card_number_generator_error_5():
+    gen = card_number_generator(10000000000000000, 10000000000000000)
+    with pytest.raises(ValueError):
+        next(gen)

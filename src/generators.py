@@ -26,7 +26,7 @@ def card_number_generator(start: int, stop: int) -> Generator[str]:
     Генератор может сгенерировать номера карт в заданном диапазоне от 0000 0000 0000 0001 до 9999 9999 9999 9999.
     Генератор должен принимать начальное и конечное значения для генерации диапазона номеров.
     """
-    if start > stop or start <= 0 or stop < 0 or stop > 9999_9999_9999_9999:
+    if start > stop or start <= 0 or stop < 0 or stop > 9999_9999_9999_9999 or start > 9999_9999_9999_9999:
         raise ValueError("Ошибка ввода диапазона")
     for i in range(start, stop + 1):
         count_zero = "0" * (16 - len(str(i)))
