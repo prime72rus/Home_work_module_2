@@ -3,7 +3,7 @@ from typing import Any, Generator
 
 def filter_by_currency(transactions_list: list[dict], target_currency: str) -> Generator[dict[Any, Any]]:
     """
-    Функция принимает на вход список словарей, представляющих транзакции.
+    Функция-генератор, принимает на вход список словарей, представляющих транзакции.
     Возвращает итератор, который поочередно выдает транзакции,
     где валюта операции соответствует заданной (например, USD).
     """
@@ -14,7 +14,7 @@ def filter_by_currency(transactions_list: list[dict], target_currency: str) -> G
 
 def transaction_descriptions(transactions_list: list[Any]) -> Generator[str]:
     """
-    Функция принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
+    Функция-генератор, принимает список словарей с транзакциями и возвращает описание каждой операции по очереди.
     """
     for transaction in transactions_list:
         yield str(transaction["description"])
