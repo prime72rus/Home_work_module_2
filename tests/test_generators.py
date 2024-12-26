@@ -173,3 +173,16 @@ def test_card_number_generator_error_5():
     gen = card_number_generator(10000000000000000, 10000000000000000)
     with pytest.raises(ValueError):
         next(gen)
+
+
+@pytest.mark.parametrize(
+    "start, stop, expected",
+    [
+        (1, 1, "0000 0000 0000 0001"),
+        (9999_9999_9999_9999, 9999_9999_9999_9999, "9999 9999 9999 9999"),
+        (5555_5555_5555_5555, 5555_5555_5555_5555, "5555 5555 5555 5555"),
+    ],
+)
+def test_card_number_generator_error_6(start, stop, expected):
+    gen = card_number_generator(start, stop)
+    assert next(gen) == expected
