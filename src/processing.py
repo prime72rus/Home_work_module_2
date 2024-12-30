@@ -14,7 +14,7 @@ def filter_by_state(
     output_data = []
     for data_item in input_data_for_filter:
         if "state" not in data_item.keys():
-            raise KeyError
+            raise KeyError("Недопустимый ключ для фильтрации")
         elif data_item["state"] == target_state:
             output_data.append(data_item)
     return output_data
