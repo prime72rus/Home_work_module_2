@@ -6,6 +6,11 @@ from typing import Any, Callable
 
 
 def log(filename: str = "") -> Callable[[Any], Any]:
+    """
+    Декоратор, который будет автоматически регистрировать детали выполнения функций,
+    такие как время вызова, время завершения, время выполнения, имя функции, передаваемые аргументы,
+    результат выполнения и информацию об ошибках.
+    """
     def log_wrapper(function: Callable[[Any], Any]) -> Any:
         @wraps(function)
         def log_inner(*args: Any, **kwargs: Any) -> Any:
