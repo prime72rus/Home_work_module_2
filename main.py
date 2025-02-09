@@ -1,7 +1,7 @@
 # Импорт модулей
 from src.processing import filter_by_state, sort_by_date
 from src.widget import get_date, mask_account_card
-from src.utils import get_operations_from_file
+from src.utils import get_operations_from_file, get_amount_transactions
 
 # Ввод данных пользователя, работа функции mask_account_card()
 while True:
@@ -74,4 +74,4 @@ print(
     )
 )
 
-print(len(get_operations_from_file("data/operations.json")))
+print(get_amount_transactions(get_operations_from_file("data/operations.json")))
