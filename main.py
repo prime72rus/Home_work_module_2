@@ -73,5 +73,3 @@ print(
         ],
     )
 )
-
-print(get_amount_transactions(get_operations_from_file("data/operations.json")))
