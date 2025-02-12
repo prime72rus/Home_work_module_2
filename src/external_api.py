@@ -22,8 +22,5 @@ def api_convert_currency(code: str, amount: str) -> Any:
 
     # status_code = response.status_code
     result = json.loads(response.text)
-    # convert_amount = json.loads(result)
 
-    return result["result"]
-
-print(api_convert_currency("USD", "100"))
+    return result.get("result", 0.0)
