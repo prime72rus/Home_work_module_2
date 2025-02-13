@@ -103,3 +103,8 @@ func ok
 Start dade and time: 30.12.24 09:55:54.150358
 Stop dade and time: 30.12.24 09:55:54.150358
 Time for work: 0:00:00 сек
+func error Делить на ноль нельзя. Inputs: (1, 0) {}
+func ok
+Start dade and time: 30.12.24 09:55:54.150358
+Stop dade and time: 30.12.24 09:55:54.150358
+Time for work: 0:00:00 сек
