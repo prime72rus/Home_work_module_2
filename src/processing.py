@@ -4,7 +4,7 @@ from src.widget import format_date_is_correct
 
 
 def filter_by_state(
-        input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
+    input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
 ) -> List[Dict[str, str | int]] | None:
     """
     Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED').
@@ -21,7 +21,7 @@ def filter_by_state(
 
 
 def sort_by_date(
-        input_data_for_sorted: List[Dict[str, str | int]], sorted_param: bool = True
+    input_data_for_sorted: List[Dict[str, str | int]], sorted_param: bool = True
 ) -> List[Dict[str, str | int]] | None:
     """
     Функция принимает список словарей и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание).

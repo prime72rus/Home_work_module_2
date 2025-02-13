@@ -11,6 +11,7 @@ def log(filename: str = "") -> Callable[[Any], Any]:
     такие как время вызова, время завершения, время выполнения, имя функции, передаваемые аргументы,
     результат выполнения и информацию об ошибках.
     """
+
     def log_wrapper(function: Callable[[Any], Any]) -> Any:
         @wraps(function)
         def log_inner(*args: Any, **kwargs: Any) -> Any:
