@@ -85,7 +85,7 @@ if __name__ == "__main__":
     print(get_amount_transactions(get_operations_from_file("data/operations.json")))
 
     result_csv = get_transaction_from_csv("data/transactions.csv")
-    print(len(result_csv))
+    print(result_csv[0])
 
     result_xlsx = get_transaction_from_xlsx("data/transactions_excel.xlsx")
-    print(len(result_xlsx))
+    print(result_xlsx[0])

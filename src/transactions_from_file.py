@@ -16,9 +16,6 @@ def get_transaction_from_csv(csv_file_path: str) -> list[dict[Hashable, Any]]:
     except FileNotFoundError:
         print(f"Ошибка: Файл {csv_file_path} не найден.")
         return []
-    except Exception as error:
-        print(f"Произошла ошибка при чтении файла: {error}")
-        return []
 
 
 def get_transaction_from_xlsx(xlsx_file_path: str) -> list[dict[Hashable, Any]]:
@@ -33,7 +30,4 @@ def get_transaction_from_xlsx(xlsx_file_path: str) -> list[dict[Hashable, Any]]:
 
     except FileNotFoundError:
         print(f"Ошибка: Файл {xlsx_file_path} не найден.")
-        return []
-    except Exception as error:
-        print(f"Произошла ошибка при чтении файла: {error}")
         return []
