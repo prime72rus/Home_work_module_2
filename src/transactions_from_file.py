@@ -1,9 +1,9 @@
-from typing import Any
+from typing import Any, Hashable
 
 import pandas as pd
 
 
-def get_transaction_from_csv(csv_file_path: str) -> list[Any]:
+def get_transaction_from_csv(csv_file_path: str) -> list[dict[Hashable, Any]]:
     """
     Функция для считывания финансовых операций из CSV-файла. Принимает путь к файлу CSV в качестве аргумента
     и возвращает список словарей с транзакциями.
@@ -21,7 +21,7 @@ def get_transaction_from_csv(csv_file_path: str) -> list[Any]:
         return []
 
 
-def get_transaction_from_xlsx(xlsx_file_path: str) -> list[Any]:
+def get_transaction_from_xlsx(xlsx_file_path: str) -> list[dict[Hashable, Any]]:
     """
     Функция для считывания финансовых операций из XLSX-файла. Принимает путь к файлу XLSX в качестве аргумента
     и возвращает список словарей с транзакциями.
