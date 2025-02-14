@@ -1,5 +1,6 @@
 # Импорт модулей
 from src.processing import filter_by_state, sort_by_date
+from src.transactions_from_file import get_transaction_from_csv, get_transaction_from_xlsx
 from src.widget import get_date, mask_account_card
 from src.utils import get_operations_from_file, get_amount_transactions
 
@@ -76,6 +77,15 @@ def main():
         )
     )
 
+
+
+
 if __name__ == "__main__":
     main()
     print(get_amount_transactions(get_operations_from_file("data/operations.json")))
+
+    result_csv = get_transaction_from_csv("data/transactions.csv")
+    print(result_csv[0])
+
+    result_xlsx = get_transaction_from_xlsx("data/transactions_excel.xlsx")
+    print(result_xlsx[0])

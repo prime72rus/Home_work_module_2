@@ -1,8 +1,8 @@
-import pytest
-from unittest.mock import patch, mock_open
+from unittest.mock import mock_open, patch
 
-from src.utils import get_operations_from_file
-from src.utils import get_amount_transactions
+import pytest
+
+from src.utils import get_amount_transactions, get_operations_from_file
 
 mocked_valid_json_content = '[{"id": 1, "amount": 100}, {"id": 2, "amount": 200}]'
 mocked_invalid_json_content = '{"key": "value"}'
