@@ -1,6 +1,6 @@
 import pytest
 
-from src.processing import filter_by_state, sort_by_date
+from src.processing import filter_by_state, sort_by_date, user_input_search, get_count_operation
 
 
 @pytest.mark.parametrize(
@@ -85,9 +85,8 @@ def dict_error_key():
     ]
 
 
-def test_filter_by_state_error_key(dict_error_key):
-    with pytest.raises(KeyError):
-        filter_by_state(dict_error_key)
+def test_missing_key(dict_error_key):
+    assert filter_by_state(dict_error_key) == []
 
 
 def test_sort_by_date_false(dict_for_test):
@@ -159,3 +158,185 @@ def test_double_date(dict_double_date):
         {"id": 615664591, "state": "CANCELED", "date": "2018-10-14T08:21:33.419441"},
         {"id": 41428829, "state": "EXECUTED", "date": "2019-07-03T18:35:29.512364"},
     ]
+
+
+@pytest.fixture
+def correct_data():
+    return [
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод частному лицу",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Покупка в магазине",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод частному лицу",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Покупка в магазине",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод частному лицу",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Покупка в магазине",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Перевод организации",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+    ]
+
+
+def test_user_input_search(correct_data):
+    assert user_input_search(correct_data, "оплата") == [
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+        {
+            "id": 650703.0,
+            "state": "EXECUTED",
+            "date": "2023-09-05T11:30:32Z",
+            "amount": 16210.0,
+            "currency_name": "Sol",
+            "currency_code": "PEN",
+            "from": "Счет 58803664561298323391",
+            "to": "Счет 39745660563456619397",
+            "description": "Оплата",
+        },
+    ]
+
+
+def test_get_count_operation(correct_data):
+    assert get_count_operation(
+        correct_data, ["Оплата", "Перевод организации", "Покупка в магазине", "Перевод частному лицу"]
+    ) == {"Перевод частному лицу": 3, "Покупка в магазине": 3, "Перевод организации": 3, "Оплата": 3}

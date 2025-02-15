@@ -1,14 +1,12 @@
 import re
 from collections import Counter
 
-from typing import Dict, List
+from typing import Any
 
 from src.widget import format_date_is_correct
 
 
-def filter_by_state(
-    input_data_for_filter: List[Dict[str, str | int]], target_state: str = "EXECUTED"
-) -> List[Dict[str, str | int]] | None:
+def filter_by_state(input_data_for_filter: list[Any], target_state: str = "EXECUTED") -> list[Any]:
     """
     Функция принимает список словарей и опционально значение для ключа state (по умолчанию 'EXECUTED').
     Функция возвращает новый список словарей, содержащий только те словари,
@@ -17,15 +15,13 @@ def filter_by_state(
     output_data = []
     for data_item in input_data_for_filter:
         if "state" not in data_item.keys():
-            raise KeyError("Недопустимый ключ для фильтрации")
+            continue
         elif data_item["state"] == target_state:
             output_data.append(data_item)
     return output_data
 
 
-def sort_by_date(
-    input_data_for_sorted: List[Dict[str, str | int]], sorted_param: bool = True
-) -> List[Dict[str, str | int]] | None:
+def sort_by_date(input_data_for_sorted: list[Any], sorted_param: bool = True) -> list[Any]:
     """
     Функция принимает список словарей и необязательный параметр, задающий порядок сортировки (по умолчанию — убывание).
     Функция должна возвращать новый список, отсортированный по дате (date).
@@ -39,9 +35,7 @@ def sort_by_date(
     return sorted(input_data_for_sorted, key=lambda x: x["date"], reverse=sorted_param)
 
 
-def user_input_search(
-    input_data_for_search: List[Dict[str, str | int | float]], search_str: str
-) -> List[Dict[str, str | int | float]]:
+def user_input_search(input_data_for_search: list[Any], search_str: str) -> list[Any]:
     """
     Функция принимает список словарей с данными о банковских операциях и строку поиска,
     а возвращает список словарей, у которых в описании есть данная строка.
@@ -57,7 +51,7 @@ def user_input_search(
     return result
 
 
-def get_count_operation(input_data: List[Dict[str, str | int | float]], list_description: list) -> dict:
+def get_count_operation(input_data: list[Any], list_description: list) -> dict:
     """
     Функция принимает список словарей с данными о банковских операциях и список категорий операций,
     а возвращает словарь, в котором ключи — это названия категорий,
