@@ -1,6 +1,5 @@
 import re
 from collections import Counter
-
 from typing import Any
 
 from src.widget import format_date_is_correct
