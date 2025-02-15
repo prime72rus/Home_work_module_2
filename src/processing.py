@@ -1,3 +1,5 @@
+import re
+
 from typing import Dict, List
 
 from src.widget import format_date_is_correct
@@ -34,3 +36,23 @@ def sort_by_date(
             if not format_date_is_correct(str(data_item["date"])):
                 raise ValueError("Недопустимые данные в значении даты")
     return sorted(input_data_for_sorted, key=lambda x: x["date"], reverse=sorted_param)
+
+
+def user_input_search(
+    input_data_for_search: List[Dict[str, str | int | float]], search_str: str
+) -> List[Dict[str, str | int | float]]:
+    """
+    Функция принимает список словарей с данными о банковских операциях и строку поиска,
+    а возвращать список словарей, у которых в описании есть данная строка.
+    Если строка поиска не введена, возвращает весь список словарей.
+    Если совпадений не найдено, возвращает пустой список.
+    """
+    result = []
+    for items in input_data_for_search:
+        match = re.search(search_str, items["description"], re.IGNORECASE)
+        if match:
+            result.append(items)
+
+    return result
+
+
